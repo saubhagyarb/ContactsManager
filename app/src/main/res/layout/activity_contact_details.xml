@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Name"
-            android:inputType="textPersonName"/>
+            android:inputType="textPersonName" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Mobile Input -->
@@ -32,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Mobile"
-            android:inputType="phone"/>
+            android:inputType="phone" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Email Input -->
@@ -47,7 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Email"
-            android:inputType="textEmailAddress"/>
+            android:inputType="textEmailAddress" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Address Input -->
@@ -62,56 +62,66 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Address"
-            android:inputType="textPostalAddress"/>
+            android:inputType="textPostalAddress" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Update Button -->
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_update_contact"
-        android:layout_width="wrap_content"
+    <!-- Buttons Row -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:cornerRadius="4dp"
-        app:icon="@drawable/update"
-        app:iconGravity="textStart"/>
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
 
-    <!-- Call, Email, Message Buttons -->
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_call"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:cornerRadius="4dp"
-        app:icon="@drawable/call"
-        app:iconGravity="textStart"/>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_update_contact"
+            style="@style/Widget.MaterialComponents.Button.Icon"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            app:icon="@drawable/update"
+            app:iconSize="24dp"
+            app:cornerRadius="24dp" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:cornerRadius="4dp"
-        app:icon="@drawable/mail"
-        app:iconGravity="textStart"/>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_call"
+            style="@style/Widget.MaterialComponents.Button.Icon"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            app:icon="@drawable/call"
+            app:iconSize="24dp"
+            app:cornerRadius="24dp" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:cornerRadius="4dp"
-        app:icon="@drawable/message"
-        app:iconGravity="textStart"/>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_email"
+            style="@style/Widget.MaterialComponents.Button.Icon"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            app:icon="@drawable/mail"
+            app:iconSize="24dp"
+            app:cornerRadius="24dp" />
 
-    <!-- Delete Button -->
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_delete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:cornerRadius="4dp"
-        app:icon="@drawable/delete"
-        app:iconGravity="textStart"
-        app:iconTint="@android:color/holo_red_dark"/>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_message"
+            style="@style/Widget.MaterialComponents.Button.Icon"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            app:icon="@drawable/message"
+            app:iconSize="24dp"
+            app:cornerRadius="24dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_delete"
+            style="@style/Widget.MaterialComponents.Button.Icon"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            app:icon="@drawable/delete"
+            app:iconSize="24dp"
+            app:cornerRadius="24dp"
+            app:iconTint="@android:color/holo_red_dark" />
+    </LinearLayout>
 
 </LinearLayout>
