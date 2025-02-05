@@ -3,17 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:background="?attr/colorSurface">
+    android:padding="16dp">
 
     <!-- Input Fields -->
     <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        app:boxStrokeColor="?attr/colorPrimary"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        app:boxStrokeColor="?attr/colorPrimary">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editText_name"
@@ -24,11 +24,11 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        app:boxStrokeColor="?attr/colorPrimary"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        app:boxStrokeColor="?attr/colorPrimary">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editText_mobile"
@@ -39,11 +39,11 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        app:boxStrokeColor="?attr/colorPrimary"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        app:boxStrokeColor="?attr/colorPrimary">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editText_email"
@@ -54,11 +54,11 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
-        app:boxStrokeColor="?attr/colorPrimary"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        app:boxStrokeColor="?attr/colorPrimary">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editText_address"
@@ -72,11 +72,11 @@
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:rowCount="2"
-        android:columnCount="2"
         android:alignmentMode="alignMargins"
+        android:columnCount="2"
         android:columnOrderPreserved="false"
-        android:padding="8dp">
+        android:padding="8dp"
+        android:rowCount="2">
 
         <!-- Update Contact Button -->
         <com.google.android.material.button.MaterialButton
@@ -84,16 +84,16 @@
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="0dp"
             android:layout_height="100dp"
-            android:layout_margin="8dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            app:icon="@drawable/update"
-            app:iconSize="32dp"
-            app:cornerRadius="16dp"
-            app:iconPadding="8dp"
-            app:iconGravity="textTop"
+            android:layout_margin="8dp"
             android:text="@string/update"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            app:cornerRadius="16dp"
+            app:icon="@drawable/update"
+            app:iconGravity="textTop"
+            app:iconPadding="8dp"
+            app:iconSize="32dp" />
 
         <!-- Call Button -->
         <com.google.android.material.button.MaterialButton
@@ -101,32 +101,32 @@
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="0dp"
             android:layout_height="100dp"
-            android:layout_margin="8dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            app:icon="@drawable/call"
-            app:iconSize="32dp"
-            app:cornerRadius="16dp"
-            app:iconPadding="8dp"
-            app:iconGravity="textTop"
+            android:layout_margin="8dp"
             android:text="@string/call"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            app:cornerRadius="16dp"
+            app:icon="@drawable/call"
+            app:iconGravity="textTop"
+            app:iconPadding="8dp"
+            app:iconSize="32dp" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_message"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="0dp"
             android:layout_height="100dp"
-            android:layout_margin="8dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            app:icon="@drawable/message"
-            app:iconSize="32dp"
-            app:cornerRadius="16dp"
-            app:iconPadding="8dp"
-            app:iconGravity="textTop"
+            android:layout_margin="8dp"
             android:text="@string/message"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            app:cornerRadius="16dp"
+            app:icon="@drawable/message"
+            app:iconGravity="textTop"
+            app:iconPadding="8dp"
+            app:iconSize="32dp" />
 
         <!-- Email Button -->
         <com.google.android.material.button.MaterialButton
@@ -134,16 +134,16 @@
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="0dp"
             android:layout_height="100dp"
-            android:layout_margin="8dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            app:icon="@drawable/mail"
-            app:iconSize="32dp"
+            android:layout_margin="8dp"
+            android:text="@string/email_text"
+            android:textSize="14sp"
             app:cornerRadius="16dp"
-            app:iconPadding="8dp"
+            app:icon="@drawable/mail"
             app:iconGravity="textTop"
-            android:text="Email"
-            android:textSize="14sp" />
+            app:iconPadding="8dp"
+            app:iconSize="32dp" />
 
         <!-- Delete Button -->
         <com.google.android.material.button.MaterialButton
@@ -151,17 +151,17 @@
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="0dp"
             android:layout_height="100dp"
-            android:layout_margin="8dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            app:icon="@drawable/delete"
-            app:iconSize="32dp"
-            app:cornerRadius="16dp"
-            app:iconPadding="8dp"
-            app:iconGravity="textTop"
-            app:iconTint="@android:color/holo_red_dark"
+            android:layout_margin="8dp"
             android:text="@string/delete"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            app:cornerRadius="16dp"
+            app:icon="@drawable/delete"
+            app:iconGravity="textTop"
+            app:iconPadding="8dp"
+            app:iconSize="32dp"
+            app:iconTint="@android:color/holo_red_dark" />
 
 
     </GridLayout>

@@ -9,4 +9,6 @@
     <string name="mobile">Mobile</string>
     <string name="message">Message</string>
     <string name="delete">Delete</string>
+    <string name="add_button">Add button</string>
+    <string name="email_text">Email</string>
 </resources>
