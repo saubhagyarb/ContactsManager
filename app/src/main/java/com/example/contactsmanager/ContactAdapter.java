@@ -1,5 +1,6 @@
 package com.example.contactsmanager;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactViewHolder> {
 
     private ArrayList<Contact> contactList;
-    private OnContactClickListener onContactClickListener;
+    private final OnContactClickListener onContactClickListener;
 
     public ContactAdapter(ArrayList<Contact> contactList, OnContactClickListener onContactClickListener) {
         this.contactList = contactList;
@@ -40,6 +41,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
         return contactList.size();
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public void updateList(ArrayList<Contact> newList) {
         contactList = newList;
         notifyDataSetChanged();
