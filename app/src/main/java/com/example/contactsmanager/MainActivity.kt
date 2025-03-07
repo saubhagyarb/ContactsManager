@@ -1,95 +1,97 @@
-package com.example.contactsmanager;
+package com.example.contactsmanager
 
-import android.content.Intent;
-import android.database.Cursor;
-import android.os.Bundle;
-import android.util.Log;
-import android.widget.EditText;
-import android.widget.LinearLayout;
+import android.R.attr.editable
+import android.content.Intent
+import android.os.Bundle
+import android.util.Log
+import android.view.View
+import android.widget.EditText
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import java.util.Locale
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+class MainActivity : AppCompatActivity() {
+    private var dbHelper: DatabaseHelper? = null
+    private var adapter: ContactAdapter? = null
+    private var contactList: ArrayList<Contact>? = null
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
-import java.util.ArrayList;
+        dbHelper = DatabaseHelper(this)
+        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView_contacts)
+        val searchBar = findViewById<EditText>(R.id.search_bar)
+        val fabAddContact = findViewById<FloatingActionButton>(R.id.fab_add_contact)
 
-public class MainActivity extends AppCompatActivity {
+        contactList = ArrayList<Contact>()
+        adapter = ContactAdapter(contactList!!, { contact: Contact? ->
+            this.onContactClicked(
+                contact!!
+            )
+        })
+        recyclerView.setLayoutManager(LinearLayoutManager(this))
+        recyclerView.setAdapter(adapter)
 
-    private DatabaseHelper dbHelper;
-    private ContactAdapter adapter;
-    private ArrayList<Contact> contactList;
+        loadContacts()
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        fabAddContact.setOnClickListener(View.OnClickListener { v: View? ->
+            val intent = Intent(this@MainActivity, AddContact::class.java)
+            startActivityForResult(intent, 1)
+        })
 
-        dbHelper = new DatabaseHelper(this);
-        RecyclerView recyclerView = findViewById(R.id.recyclerView_contacts);
-        EditText searchBar = findViewById(R.id.search_bar);
-        FloatingActionButton fabAddContact = findViewById(R.id.fab_add_contact);
-
-        contactList = new ArrayList<>();
-        adapter = new ContactAdapter(contactList, this::onContactClicked);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adapter);
-
-        loadContacts();
-
-        fabAddContact.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, activity_add_contact.class);
-            startActivityForResult(intent, 1);
-        });
-
-        searchBar.addTextChangedListener(new SimpleTextWatcher() {
-            @Override
-            public void afterTextChanged(String text) {
-                filterContacts(text);
+        searchBar.addTextChangedListener(object : SimpleTextWatcher() {
+            override fun afterTextChanged(text: String?) {
+                editable?.let {
+                    filterContacts(it.toString())
+                }
             }
-        });
+        })
+
     }
 
-    private void loadContacts() {
-        contactList.clear();
-        Cursor cursor = dbHelper.getAllContacts();
-        if (cursor.moveToFirst()) {
+    private fun loadContacts() {
+        contactList!!.clear()
+        val cursor = dbHelper!!.allContacts
+        if (cursor!!.moveToFirst()) {
             do {
-                int id = cursor.getInt(cursor.getColumnIndex("id"));
-                String name = cursor.getString(cursor.getColumnIndex("name"));
-                String mobile = cursor.getString(cursor.getColumnIndex("mobile"));
-                String email = cursor.getString(cursor.getColumnIndex("email"));
-                String address = cursor.getString(cursor.getColumnIndex("address"));
-                contactList.add(new Contact(id, name, mobile, email, address));
-            } while (cursor.moveToNext());
+                val id = cursor.getInt(cursor.getColumnIndex("id"))
+                val name = cursor.getString(cursor.getColumnIndex("name"))
+                val mobile = cursor.getString(cursor.getColumnIndex("mobile"))
+                val email = cursor.getString(cursor.getColumnIndex("email"))
+                val address = cursor.getString(cursor.getColumnIndex("address"))
+                contactList!!.add(Contact(id, name, mobile, email, address))
+            } while (cursor.moveToNext())
         }
-        cursor.close();
-        adapter.notifyDataSetChanged();
+        cursor.close()
+        adapter!!.notifyDataSetChanged()
     }
 
-    private void filterContacts(String query) {
-        ArrayList<Contact> filteredList = new ArrayList<>();
-        for (Contact contact : contactList) {
-            if (contact.getName().toLowerCase().contains(query.toLowerCase())) {
-                filteredList.add(contact);
+    private fun filterContacts(query: String) {
+        val filteredList = ArrayList<Contact?>()
+        for (contact in contactList!!) {
+            if (contact.name!!.lowercase(Locale.getDefault())
+                    .contains(query.lowercase(Locale.getDefault()))
+            ) {
+                filteredList.add(contact)
             }
         }
-        adapter.updateList(filteredList);
+        adapter!!.updateList(filteredList as ArrayList<Contact>)
     }
 
-    private void onContactClicked(Contact contact) {
-        Log.d("MainActivity", "Clicked contact ID: " + contact.getId());
-        Intent intent = new Intent(MainActivity.this, activity_contact_details.class);
-        intent.putExtra("CONTACT_ID", contact.getId());
-        startActivityForResult(intent, 1);
+    private fun onContactClicked(contact: Contact) {
+        Log.d("MainActivity", "Clicked contact ID: " + contact.id)
+        val intent = Intent(this@MainActivity, ContactDetails::class.java)
+        intent.putExtra("CONTACT_ID", contact.id)
+        startActivityForResult(intent, 1)
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == RESULT_OK) {
-            loadContacts();
+            loadContacts()
         }
     }
 }
