@@ -55,6 +55,7 @@
         app:tint="?attr/colorOnPrimary"
         app:fabSize="normal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        android:paddingBottom="20dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
