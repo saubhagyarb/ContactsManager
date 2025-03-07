@@ -1,62 +1,48 @@
-package com.example.contactsmanager;
+package com.example.contactsmanager
 
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
+import android.annotation.SuppressLint
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import com.example.contactsmanager.ContactAdapter.ContactViewHolder
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.ArrayList;
-
-public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactViewHolder> {
-
-    private ArrayList<Contact> contactList;
-    private final OnContactClickListener onContactClickListener;
-
-    public ContactAdapter(ArrayList<Contact> contactList, OnContactClickListener onContactClickListener) {
-        this.contactList = contactList;
-        this.onContactClickListener = onContactClickListener;
+class ContactAdapter(
+    private var contactList: ArrayList<Contact>,
+    private val onContactClickListener: OnContactClickListener
+) : RecyclerView.Adapter<ContactViewHolder?>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactViewHolder {
+        val view =
+            LayoutInflater.from(parent.getContext()).inflate(R.layout.contact_item, parent, false)
+        return ContactViewHolder(view)
     }
 
-    @NonNull
-    @Override
-    public ContactViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.contact_item, parent, false);
-        return new ContactViewHolder(view);
+    override fun onBindViewHolder(holder: ContactViewHolder, position: Int) {
+        val contact = contactList.get(position)
+        holder.textViewName.text = contact.name
+        holder.itemView.setOnClickListener(View.OnClickListener { v: View? ->
+            onContactClickListener.onContactClick(
+                contact
+            )
+        })
     }
 
-    @Override
-    public void onBindViewHolder(@NonNull ContactViewHolder holder, int position) {
-        Contact contact = contactList.get(position);
-        holder.textViewName.setText(contact.getName());
-        holder.itemView.setOnClickListener(v -> onContactClickListener.onContactClick(contact));
-    }
-
-    @Override
-    public int getItemCount() {
-        return contactList.size();
+    override fun getItemCount(): Int {
+        return contactList.size
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    public void updateList(ArrayList<Contact> newList) {
-        contactList = newList;
-        notifyDataSetChanged();
+    fun updateList(newList: ArrayList<Contact>) {
+        contactList = newList
+        notifyDataSetChanged()
     }
 
-    public interface OnContactClickListener {
-        void onContactClick(Contact contact);
+    fun interface OnContactClickListener {
+        fun onContactClick(contact: Contact?)
     }
 
-    public static class ContactViewHolder extends RecyclerView.ViewHolder {
-        TextView textViewName;
-
-        public ContactViewHolder(@NonNull View itemView) {
-            super(itemView);
-            textViewName = itemView.findViewById(R.id.textView_name);
-        }
+    class ContactViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        var textViewName: TextView = itemView.findViewById<TextView>(R.id.textView_name)
     }
 }
