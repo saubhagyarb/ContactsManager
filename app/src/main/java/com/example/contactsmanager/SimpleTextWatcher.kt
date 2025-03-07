@@ -1,25 +1,21 @@
-package com.example.contactsmanager;
+package com.example.contactsmanager
 
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.text.Editable
+import android.text.TextWatcher
 
-public abstract class SimpleTextWatcher implements TextWatcher {
-
-    @Override
-    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+abstract class SimpleTextWatcher : TextWatcher {
+    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
         // No action needed
     }
 
-    @Override
-    public void onTextChanged(CharSequence s, int start, int before, int count) {
+    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
         // No action needed
     }
 
-    @Override
-    public void afterTextChanged(Editable s) {
+    override fun afterTextChanged(s: Editable) {
         // Abstract method for subclasses to implement
-        afterTextChanged(s.toString());
+        afterTextChanged(s.toString())
     }
 
-    public abstract void afterTextChanged(String text);
+    abstract fun afterTextChanged(text: String?)
 }
